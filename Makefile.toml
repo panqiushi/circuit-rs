@@ -5,4 +5,4 @@ extend = [
 
 [env]
 
-CLIENT_PROCESS_NAME = "leptos-tailwind"
+CLIENT_PROCESS_NAME = "circuit-rs"
