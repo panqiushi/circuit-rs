@@ -1,16 +1,18 @@
+use crate::error_template::{AppError, ErrorTemplate};
+
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
+
+pub mod error_template;
 
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
 
-
-
     view! {
 
-        <Stylesheet id="leptos" href="/pkg/tailwind.css"/>
+        <Stylesheet id="leptos" href="/pkg/circuit-rs.css"/>
         <Link rel="shortcut icon" type_="image/ico" href="/favicon.ico"/>
         <Router>
             <Routes>
