@@ -24,8 +24,7 @@ wasm-bindgen = "0.2.84"
 thiserror = "1.0.40"
 tracing = { version = "0.1.37", optional = true }
 http = "0.2.11"
-diesel = { version = "2.1.4", features = ["sqlite"] }
-dotenv = "0.15.0"
+sea-orm = { version = "0.12.7", features = ["sqlx-sqlite", "runtime-tokio-rustls", "macros"] }
 
 [features]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]

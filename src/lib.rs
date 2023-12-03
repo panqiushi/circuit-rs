@@ -1,8 +1,7 @@
 use cfg_if::cfg_if;
 pub mod app;
 pub mod fallback;
-pub mod models;
-pub mod schema;
+mod entity;
 
 cfg_if! { if #[cfg(feature = "hydrate")] {
     use leptos::*;
