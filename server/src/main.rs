@@ -5,7 +5,7 @@ use leptos::*;
 use leptos_axum::{generate_route_list, LeptosRoutes};
 
 pub mod fileserv;
-pub mod entity;
+pub mod model;
 
 #[tokio::main]
 async fn main() {

@@ -34,8 +34,6 @@ wasm-bindgen = "=0.2.89"
 [[workspace.metadata.leptos]]
 # this name is used for the wasm, js and css file names
 name = "circuit-rs"
-output-name = "circuit-rs"
-
 
 # the package in the workspace that contains the server binary (binary crate)
 bin-package = "server"
@@ -52,6 +50,7 @@ site-pkg-dir = "pkg"
 # The tailwind input file.
 #
 # Optional, Activates the tailwind build
+output-name = "tailwind"
 tailwind-input-file = "style/tailwind.css"
 
 # [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/app.css
