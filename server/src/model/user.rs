@@ -1,5 +1,7 @@
-use sea_orm::entity::prelude::*;
+use sea_orm::{entity::prelude::*, Database};
 use serde::{Deserialize, Serialize};
+
+use super::db::DB;
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Deserialize, Serialize)]
 #[sea_orm(table_name = "users")]
@@ -17,3 +19,11 @@ pub struct Model {
 pub enum Relation {}
 
 impl ActiveModelBehavior for ActiveModel {}
+
+
+pub async fn insert_user(user: &Model) -> Result<(), DbErr> {
+    let db = Database::connect("sqlite://circuit.db?mode=rwc").await?;
+    let user = ActiveModel::from(user.clone());
+    let result = user.insert(&db).await?;
+    Ok(())
+}
