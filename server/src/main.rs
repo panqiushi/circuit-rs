@@ -1,11 +1,11 @@
 use app::*;
-use axum::{routing::post, Router};
+use axum::{routing::post, Router, extract::Query};
 use fileserv::file_and_error_handler;
 use leptos::*;
 use leptos_axum::{generate_route_list, LeptosRoutes};
+use server::models::User;
 
 pub mod fileserv;
-pub mod model;
 
 #[tokio::main]
 async fn main() {
@@ -28,6 +28,8 @@ async fn main() {
         .fallback(file_and_error_handler)
         .with_state(leptos_options);
 
+    app.route("/user", get)
+
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
     log::info!("listening on http://{}", &addr);
@@ -35,4 +37,10 @@ async fn main() {
         .serve(app.into_make_service())
         .await
         .unwrap();
+}
+
+
+fn query_user(Query(user): Query<User>) -> User {
+    
+
 }

@@ -14,17 +14,17 @@ leptos_meta = { version = "0.5.4", features = ["nightly"] }
 leptos_router = { version = "0.5.4", features = ["nightly"] }
 leptos_axum = { version = "0.5.4" }
 
-axum = "0.7.2"
+axum = "0.6.20"
 cfg-if = "1"
 console_error_panic_hook = "0.1.7"
 console_log = "1"
-http = "1.0.0"
+http = "0.2.9"
 log = "0.4.20"
 simple_logger = "4.2.0"
 thiserror = "1"
 tokio = { version = "1.33.0", features = ["full"] }
 tower = { version = "0.4.13", features = ["full"] }
-tower-http = { version = "0.5", features = ["full"] }
+tower-http = { version = "0.4", features = ["full"] }
 wasm-bindgen = "=0.2.89"
 
 # See https://github.com/akesson/cargo-leptos for documentation of all the parameters.

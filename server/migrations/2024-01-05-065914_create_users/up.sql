@@ -1,0 +1,10 @@
+-- Your SQL goes here
+
+CREATE TABLE users (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  username VARCHAR NOT NULL,
+  hash_password VARCHAR NOT NULL,
+  email VARCHAR NOT NULL,
+  phone VARCHAR NOT NULL,
+  role INTEGER NOT NULL DEFAULT 0
+);

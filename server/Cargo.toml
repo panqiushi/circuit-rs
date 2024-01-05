@@ -9,7 +9,6 @@ edition = "2021"
 app = { path = "../app", default-features = false, features = ["ssr"] }
 leptos = { workspace = true, features = [ "ssr" ]}
 leptos_axum.workspace = true
-sea-orm = { version = "0.12.7", features = ["sqlx-sqlite", "runtime-tokio-rustls", "macros"]}
 serde = { version = "1.0.193" }
 
 axum.workspace = true
@@ -19,3 +18,7 @@ tower.workspace = true
 tower-http.workspace = true
 log.workspace = true
 lazy_static = "1.4.0"
+diesel = { version = "2.1.4", features = ["sqlite"] }
+dotenvy = "0.15.7"
+r2d2 = "0.8.10"
+r2d2-diesel = "1.0.0"
