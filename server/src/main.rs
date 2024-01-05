@@ -1,9 +1,17 @@
+use std::sync::Arc;
+
 use app::*;
-use axum::{routing::post, Router, extract::Query};
+use axum::{
+    extract::Path,
+    extract::Query,
+    routing::{get, post},
+    Json, Router, Extension, http::StatusCode,
+};
+use diesel::SqliteConnection;
 use fileserv::file_and_error_handler;
 use leptos::*;
-use leptos_axum::{generate_route_list, LeptosRoutes};
-use server::models::User;
+use leptos_axum::{generate_route_list, LeptosRoutes, RequestParts};
+use server::{establish_connection, models::User, find_user_by_id};
 
 pub mod fileserv;
 
@@ -21,14 +29,15 @@ async fn main() {
     let addr = leptos_options.site_addr;
     let routes = generate_route_list(App);
 
+    // let mut conn = establish_connection();
+
     // build our application with a route
     let app = Router::new()
+        .route("/api/user/:id", get(handle_user_info))
         .route("/api/*fn_name", post(leptos_axum::handle_server_fns))
         .leptos_routes(&leptos_options, routes, App)
         .fallback(file_and_error_handler)
         .with_state(leptos_options);
-
-    app.route("/user", get)
 
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
@@ -39,8 +48,13 @@ async fn main() {
         .unwrap();
 }
 
-
-fn query_user(Query(user): Query<User>) -> User {
-    
-
+async fn handle_user_info(
+    // Path(id): Path<i32>,
+) -> Result<Json<User>, StatusCode> {
+    let mut conn = establish_connection();
+    match find_user_by_id(&mut conn, 1) {
+        Ok(user) => Ok(Json(user)),
+        Err(_) => Err(StatusCode::NOT_FOUND),
+    }
 }
+

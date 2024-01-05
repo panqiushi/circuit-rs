@@ -1,9 +1,6 @@
 extern crate lazy_static;
 extern crate diesel;
-extern crate r2d2;
-extern crate r2d2_diesel;
-
-use diesel::prelude::*;
+use diesel::{prelude::*, result::Error};
 
 use dotenvy::dotenv;
 use std::env;
@@ -21,21 +18,10 @@ pub fn establish_connection() -> SqliteConnection {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-pub fn create_user(conn: &mut SqliteConnection, username: &str, email: &str) -> User {
-    use schema::users;
+pub fn find_user_by_id(conn: &mut SqliteConnection, user_id: i32) -> Result<User, Error> {
+    use schema::users::dsl::*;
 
-    let new_user = User {
-        username:username.to_string(), 
-        email: email.to_string(),
-    };
-
-    diesel::insert_into(users::table)
-        .values(&new_user)
-        .execute(conn)
-        .expect("Error saving new user");
-
-    users::table
-        .order(users::id.desc())
-        .first(conn)
-        .expect("Error saving new user")
+    users
+        .filter(id.eq(user_id))
+        .first::<User>(conn)
 }
